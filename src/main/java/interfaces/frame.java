@@ -1,16 +1,9 @@
 package interfaces;
 
-
-
-
-
 import java.io.File;
 import javax.swing.DefaultListModel;
 import java.io.FileWriter;
 import java.io.IOException;
-
-
-
 
 public class frame extends javax.swing.JFrame {
     

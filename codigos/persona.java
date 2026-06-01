@@ -1,12 +1,12 @@
-AUTOR=terrible
+AUTOR=ivan
 VERSION=v1
+APROBADO_AUTOR=true
+APROBADO_REVISOR=false
 ESTADO=PENDIENTE
 ====================================
-AUTOR=terrible
-VERSION=v1
-ESTADO=PENDIENTE
-====================================
-public class persona{
-     private int id ;
-     private String nombre;
+/*creacion de objetos*/
+public class  persona{
+	private int id;
+	private String nombre;
+	private int edad;
 }

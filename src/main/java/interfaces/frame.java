@@ -26,6 +26,15 @@ public class frame extends javax.swing.JFrame {
         initComponents();
         areaCodigo.setEditable(false);
         cargarListaArchivos();
+        java.awt.Dimension pantalla =
+            java.awt.Toolkit.getDefaultToolkit()
+                            .getScreenSize();
+
+        int ancho = pantalla.width / 2;
+        double alto = pantalla.height*0.75;
+
+        setSize(ancho, (int)alto);
+        setLocationRelativeTo(null);
 
         
     }
@@ -56,7 +65,7 @@ public class frame extends javax.swing.JFrame {
         btnaprobarAutor = new javax.swing.JButton();
         btnaprobarRevisor = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        codigoaprobar = new javax.swing.JTextArea();
+        codigoAprobar = new javax.swing.JTextArea();
         rechazar = new javax.swing.JButton();
         btnPruebas = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -191,9 +200,9 @@ public class frame extends javax.swing.JFrame {
         btnaprobarRevisor.setText("aprobarRevisor");
         btnaprobarRevisor.addActionListener(this::btnaprobarRevisorActionPerformed);
 
-        codigoaprobar.setColumns(20);
-        codigoaprobar.setRows(5);
-        jScrollPane1.setViewportView(codigoaprobar);
+        codigoAprobar.setColumns(20);
+        codigoAprobar.setRows(5);
+        jScrollPane1.setViewportView(codigoAprobar);
 
         rechazar.setText("rechazar");
         rechazar.addActionListener(this::rechazarActionPerformed);
@@ -291,19 +300,20 @@ public class frame extends javax.swing.JFrame {
             .addGroup(panelGlobalLayout.createSequentialGroup()
                 .addContainerGap(20, Short.MAX_VALUE)
                 .addComponent(listaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         panelGlobalLayout.setVerticalGroup(
             panelGlobalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGlobalLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 281, Short.MAX_VALUE))
-            .addGroup(panelGlobalLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(listaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelGlobalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelGlobalLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelGlobalLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(listaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -392,7 +402,6 @@ public class frame extends javax.swing.JFrame {
 
                 contenido.append(linea)
                          .append("\n");
-
             }
 
             br.close();
@@ -403,7 +412,7 @@ public class frame extends javax.swing.JFrame {
 
             cambioActual.asociarResultadosPruebas(prueba);
             cambioActual.asociarResultadosAnalisis(analisis);
-            codigoaprobar.setText(contenido.toString());
+            codigoAprobar.setText(contenido.toString());
 
         } catch (Exception e) {
 
@@ -425,7 +434,7 @@ public class frame extends javax.swing.JFrame {
         }
         revisionActual.aprobarAutor();
         try {
-            String contenido = codigoaprobar.getText();
+            String contenido = codigoAprobar.getText();
             contenido = contenido.replace(
                     "APROBADO_AUTOR=false",
                     "APROBADO_AUTOR=true"
@@ -440,7 +449,7 @@ public class frame extends javax.swing.JFrame {
             writer.write(contenido);
             writer.close();
 
-            codigoaprobar.setText(contenido);
+            codigoAprobar.setText(contenido);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -464,7 +473,7 @@ public class frame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Seleccione un archivo." );
         return;
         }
-        String contenido = codigoaprobar.getText();
+        String contenido = codigoAprobar.getText();
         if(!contenido.contains("APROBADO_AUTOR=true")){
             JOptionPane.showMessageDialog(this, "El autor aún no aprobó el cambio.");
             return;
@@ -486,7 +495,7 @@ public class frame extends javax.swing.JFrame {
             FileWriter writer = new FileWriter("codigos/" + archivoSeleccionado);
             writer.write(contenido);
             writer.close();
-            codigoaprobar.setText(contenido);
+            codigoAprobar.setText(contenido);
         } catch(Exception e){
             e.printStackTrace();
         }
@@ -521,11 +530,12 @@ public class frame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnaprobarRevisorActionPerformed
 
     private void rechazarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rechazarActionPerformed
-        JOptionPane.showMessageDialog(this, "Cambio rechazado.");
+        codigoAprobar.setText("");
+        JOptionPane.showMessageDialog(this, "Cambio rechazado.");        
     }//GEN-LAST:event_rechazarActionPerformed
 
     private void btnPruebasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebasActionPerformed
-        codigoaprobar.setEditable(false);
+        codigoAprobar.setEditable(false);
         listaPanel.setSelectedIndex(3); 
         if(cambioActual == null){
             JOptionPane.showMessageDialog(this,  "Seleccione un archivo primero.");
@@ -655,7 +665,7 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JButton btnautor;
     private javax.swing.JButton btnguardar;
     private javax.swing.JButton btnrevisor;
-    private javax.swing.JTextArea codigoaprobar;
+    private javax.swing.JTextArea codigoAprobar;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;

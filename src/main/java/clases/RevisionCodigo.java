@@ -10,8 +10,9 @@ public class RevisionCodigo {
     private String estado; 
     private String comentarios;
     private CambioCodigo cambioAsociado;
+    private boolean aprobadoAutor;
+    private boolean aprobadoRevisor;
 
-    
     public RevisionCodigo(int idRevision, String autor, String revisor, CambioCodigo cambioAsociado) {
         this.idRevision = idRevision;
         this.autor = autor;
@@ -19,6 +20,8 @@ public class RevisionCodigo {
         this.estado = "PENDIENTE";
         this.comentarios = "";
         this.cambioAsociado = cambioAsociado;
+        aprobadoAutor = false;
+        aprobadoRevisor = false;
     }
 
     public String getEstado() {//mostrar estado
@@ -50,7 +53,7 @@ public class RevisionCodigo {
         }
         
         boolean confir;
-        if (pruebasPasadas && analisisPasado) {
+        if (pruebasPasadas && analisisPasado && aprobadoAutor && aprobadoRevisor) {
             this.estado = "APROBADO";
             this.registrarComentarios("El código cumple perfectamente con los criterios técnicos requeridos (Cobertura > 80% y baja duplicación).");
             confir =  true;
@@ -67,5 +70,20 @@ public class RevisionCodigo {
     public void registrarComentarios(String nuevosComentarios) {
         this.comentarios = nuevosComentarios;
         System.out.println("Comentarios de la Revisión #" + idRevision + ": " + this.comentarios);
+    }
+    
+    public void aprobarAutor(){
+        aprobadoAutor = true;
+    }
+
+    public void aprobarRevisor(){
+        aprobadoRevisor = true;
+    }
+    public boolean isAprobacionAutor() {
+        return aprobadoAutor;
+    }
+
+    public boolean isAprobacionRevisor() {
+        return aprobadoRevisor;
     }
 }

@@ -24,4 +24,16 @@ public class Usuario {
     public void consultarHistorial(HistorialRefactorizaciones historial) {
         historial.mostrarHistorial();
     }
+    
+    public void actuarComoAutor() {
+        System.out.println(nombre + " actúa como Autor");
+    }
+
+    public void actuarComoRevisor() {
+        System.out.println(nombre + " actúa como Revisor");
+    }
+
+    public boolean darAprobacion() {
+        return true;
+    }
 }

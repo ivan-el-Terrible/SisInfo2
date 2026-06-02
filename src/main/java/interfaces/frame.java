@@ -459,8 +459,7 @@ public class frame extends javax.swing.JFrame {
             e.printStackTrace();
         }
 
-        System.out.println(
-                revisionActual.isAprobacionAutor()
+        System.out.println( revisionActual.isAprobacionAutor()
         );
 
         JOptionPane.showMessageDialog(
@@ -591,7 +590,9 @@ public class frame extends javax.swing.JFrame {
             }
         }
         System.out.println(System.getProperty("user.dir"));
+        System.out.println("este es el unico");
         lista.setModel(modelo);
+        
     }
     
     /*guardar archivos creados */

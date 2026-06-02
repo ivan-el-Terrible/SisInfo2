@@ -1,9 +1,13 @@
 package com.mycompany.sisinfo2;
 
+import interfaces.PantallaPrincipal;
+
 public class SisInfo2 {
 
     public static void main(String[] args) {
-        System.out.println("httola mundo");
-        System.out.println(System.getProperty("user.dir"));
-    }   
+
+        java.awt.EventQueue.invokeLater(() -> {
+            new PantallaPrincipal();
+        });
+    }
 }

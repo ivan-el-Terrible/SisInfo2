@@ -74,6 +74,7 @@ public class frame extends javax.swing.JFrame {
         areaResultados = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         lista = new javax.swing.JList<>();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -321,6 +322,10 @@ public class frame extends javax.swing.JFrame {
 
         getContentPane().add(panelGlobal, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 570, 450));
 
+        jButton1.setText("Volver al menu");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, 130, 30));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -561,6 +566,11 @@ public class frame extends javax.swing.JFrame {
         areaResultados.setText(resultado);
         areaResultados.setEditable(false);
     }//GEN-LAST:event_btnPruebasActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new PantallaPrincipal();
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     
     private void cargarListaArchivos() {
@@ -666,6 +676,7 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JButton btnguardar;
     private javax.swing.JButton btnrevisor;
     private javax.swing.JTextArea codigoAprobar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
